@@ -1,0 +1,27 @@
+version: '3.5'
+
+services:
+  db-extract:
+    image: postgres:latest
+    env_file:
+      - .env
+    networks:
+      - proxynet
+
+  web-extract:
+    build: .
+    command: /code/runserver.sh
+    volumes:
+      - .:/code
+    ports:
+      - "8004:8000"
+    depends_on:
+      - db-extract
+    env_file:
+      - .env
+    networks:
+      - proxynet
+
+networks:
+  proxynet:
+    name: EstudePlus-network
