@@ -5,6 +5,7 @@
 {% block content %}
 {% if user.is_authenticated %}
   logado!
+  <p><a href="{% url 'logout' %}">logout</a></p>
 {% else %}
   <p>Não logado!</p>
   <a href="{% url 'login' %}">login</a>
