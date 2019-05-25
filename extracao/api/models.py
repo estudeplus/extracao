@@ -30,3 +30,13 @@ class Student(models.Model):
         help_text=("Student Mention in the subject"),
         max_length=2,
     )
+
+    def __str__(self):
+        return self.code + " " + self.name
+
+    class Meta:
+        """
+        Some information about Student class.
+        """
+        verbose_name = ("Student")
+        verbose_name_plural = ("Students")
