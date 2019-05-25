@@ -17,10 +17,12 @@ class Student(models.Model):
 
     ira = models.FloatField(
         ('IRA'),
+        help_text=("Student academic performance Index"),
     )
 
     grade = models.FloatField(
         ('Grade'),
+        help_text=("Student grade on the tutor selection process"),
     )
 
     mention = models.CharField(
