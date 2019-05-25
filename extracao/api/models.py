@@ -54,7 +54,7 @@ class Professor(models.Model):
         max_length=100,
     )
 
-    name = models.CharField(
+    email = models.CharField(
         ('Email'),
         help_text=("Professor email"),
         max_length=100,
