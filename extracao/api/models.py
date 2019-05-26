@@ -90,7 +90,7 @@ class Student(models.Model):
     subject = models.ForeignKey(
         Subject,
         related_name="tutors",
-        on_delete=models.SET_NULL
+        on_delete=models.CASCADE
     )
 
     def __str__(self):
