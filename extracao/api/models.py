@@ -45,6 +45,7 @@ class Subject(models.Model):
     professor = models.ForeignKey(
         Professor,
         related_name="subjects",
+        null=True,
         on_delete=models.SET_NULL
     )
 
