@@ -13,5 +13,4 @@ class FormView(LoginRequiredMixin, FormView):
         '''
         Receive form already validated
         '''
-
         pass
