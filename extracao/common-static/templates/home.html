@@ -5,7 +5,8 @@
 {% block content %}
 {% if user.is_authenticated %}
   logado!
-  <p><a href="{% url 'logout' %}">logout</a></p>
+  Redirecionando
+  <meta http-equiv="refresh" content="0; url={% url 'upload-file' %}" />
 {% else %}
   <p>Não logado!</p>
   <a href="{% url 'login' %}">login</a>
