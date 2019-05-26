@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 
 
 class Document(models.Model):
@@ -13,7 +14,8 @@ class Document(models.Model):
     )
 
     document = models.FileField(
-        upload_to='documents/%Y/%m/%d/'
+        upload_to='documents/%Y/%m/',
+        validators=[FileExtensionValidator(allowed_extensions=['xlsx', 'csv'])]
     )
 
     uploaded_at = models.DateTimeField(
