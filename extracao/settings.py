@@ -128,6 +128,9 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'extracao/common-static/static/'),
 )
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'extracao/common-static/media/')
+
 LOGOUT_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
