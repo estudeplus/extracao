@@ -16,4 +16,5 @@ class CoreManager():
     
     def load(self, state):
         self._state = state
+        self._api_manager.set_subject(self)
         self._notify()

@@ -11,3 +11,4 @@ class ApiManager():
     
     def update(self):
         self._data = self._core_manager.get_state()
+        print(self._data)

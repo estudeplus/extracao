@@ -6,6 +6,7 @@ from django.contrib import messages
 
 from .forms import DocumentForm
 from .models import Document
+from .coremanager import CoreManager
 
 class FormView(LoginRequiredMixin, FormView):
 
@@ -21,5 +22,7 @@ class FormView(LoginRequiredMixin, FormView):
         Receive form already validated
         '''
         document = form.save()
+        core = CoreManager()
+        core.load(document)
         return super().form_valid(form)
 
