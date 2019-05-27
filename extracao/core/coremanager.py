@@ -4,19 +4,16 @@ from ..api.apimanager import ApiManager
 
 class CoreManager():
 
-    def __init__(self, state):
-        self._observer = None
-        self._state = state
-    
-    def attach(self, observer):
-        observer._subject = self
-        self._observer = observer
+    def __init__(self):
+        self._api_manager = ApiManager()
+        self._state = None
     
     def get_state(self):
         return self._state.document
     
     def _notify(self):
-        pass
+        self._api_manager.update()
     
-    def load(self):
-        pass
+    def load(self, state):
+        self._state = state
+        self._notify()
