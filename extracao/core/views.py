@@ -20,8 +20,8 @@ class FormView(LoginRequiredMixin, FormView):
     
     def get_file_type(self, file):
         if(file.path.endswith('.xlsx')):
-            return "xlsx"
-        return "csv"
+            return 'xlsx'
+        return 'csv'
 
     def form_valid(self, form):
         '''

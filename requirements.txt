@@ -5,3 +5,4 @@ djangorestframework
 requests
 Pillow
 pandas
+xlrd

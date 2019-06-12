@@ -9,7 +9,7 @@ class CoreManager():
         self._state = None
     
     def get_state(self):
-        return self._state.document
+        return self._state
     
     def _notify(self):
         self._api_manager.update()
