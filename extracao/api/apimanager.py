@@ -1,5 +1,7 @@
 import pandas as pd
 
+from django.shortcuts import redirect
+
 from .models import Professor, Subject, Student
 from ..core.states import Extensions
 
@@ -16,7 +18,12 @@ class ApiManager():
         self._data = self._core_manager.get_state()
         if(self._data.extension == 'xlsx'):
             print("File Extension: xlsx")
-            self.load_xlsx(self._data.document)
+            if(self.load_xlsx(self._data.document)):
+                # TODO If correct, it's time to add the data to the models
+                pass
+            else:
+                # TODO If not correct, notify the view that the uploaded document is not correct
+                pass
         else:
             print("File Extension: csv")
     
