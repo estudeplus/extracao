@@ -25,21 +25,35 @@ class ApiManager():
             for index, row in df.iterrows():
                 print(row['código'], row['disciplina'])
                 subject = self.check_subject(row)
-                if(subject):
-                    pass
-                else:
-                    # Maybe adding all data models in the lines
-                    # above give the chance to pop the already used
-                    # data so the code does not pass through the same data
-                    continue
         else:
             # If not correct, notify the view that the uploaded document is not correct
             pass
+        
+        subs = Subject.objects.all()
+        for sub in subs:
+            print(sub.name)
+            print(sub.class_code)
+            print(sub.professor)
     
-    def get_subject_students(self, data):
-        pass
+    def save_student(self, row, subject):
+
+        try:
+            student = Student.objects.get(code=row['matrícula'])
+            student.subject = subject
+            student.save()
+        except Student.DoesNotExist:
+            student = Student(
+                code=row['matrícula'],
+                name=row['aluno'],
+                email=row['email do aluno'],
+                ira=row['ira'],
+                grade=row['nota final'],
+                mention=row['menção'],
+                subject=subject
+            )
+            student.save()
     
-    def get_professor(self, row):
+    def save_professor(self, row, subject):
 
         # Get a existent professor, or create one
 
@@ -48,11 +62,12 @@ class ApiManager():
         except Professor.DoesNotExist:
             professor = Professor(
                 name=row['professor'],
-                email=row['email'],
+                email=row['email do professor'],
             )
             professor.save()
         
-        return professor
+        subject.professor = professor
+        subject.save()
     
     def check_subject(self, row):
 
@@ -71,9 +86,8 @@ class ApiManager():
                 class_code=row['turma']
             )
             subject.save()
-            professor = self.get_professor(row)
-            subject.professor = professor
-            subject.save()
+            self.save_professor(row, subject)
+            self.save_student(row, subject)
 
             return subject
 

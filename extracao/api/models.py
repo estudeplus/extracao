@@ -29,11 +29,14 @@ class Professor(models.Model):
 
 class Subject(models.Model):
 
+    id = models.AutoField(
+        primary_key=True
+    )
+
     code = models.CharField(
         ('Code'),
         help_text=("Subject Code"),
         max_length=15,
-        primary_key=True
     )
 
     name = models.CharField(
@@ -45,7 +48,7 @@ class Subject(models.Model):
     class_code = models.CharField(
         ('Class Code'),
         help_text=("Class Code"),
-        max_length=3,
+        max_length=10,
     )
 
     professor = models.ForeignKey(
@@ -75,6 +78,12 @@ class Student(models.Model):
     name = models.CharField(
         ('Name'),
         help_text=("Student Name"),
+        max_length=100,
+    )
+
+    email = models.CharField(
+        ('Email'),
+        help_text=("Student Email"),
         max_length=100,
     )
 
