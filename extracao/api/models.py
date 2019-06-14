@@ -42,6 +42,12 @@ class Subject(models.Model):
         max_length=50,
     )
 
+    class_code = models.CharField(
+        ('Class Code'),
+        help_text=("Class Code"),
+        max_length=3,
+    )
+
     professor = models.ForeignKey(
         Professor,
         related_name="subjects",
