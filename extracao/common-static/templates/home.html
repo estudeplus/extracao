@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  logado!
+  Redirecionando
+  <meta http-equiv="refresh" content="0; url={% url 'upload-file' %}" />
+{% else %}
+  <p>Não logado!</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}
