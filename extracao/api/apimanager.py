@@ -3,7 +3,7 @@ import pandas as pd
 from django.shortcuts import redirect
 
 from .models import Professor, Subject, Student
-from ..core.states import Extensions
+
 
 class ApiManager():
 
@@ -15,37 +15,38 @@ class ApiManager():
         self._core_manager = core
 
     def update(self):
+        Subject.objects.all().delete()
+        Professor.objects.all().delete()
+        Student.objects.all().delete()
         self._data = self._core_manager.get_state()
         self.load()
 
     def load(self):
         df = self.get_data()
+        df = df.fillna(0)
         if(self.check_data(df.columns)):
             # If correct, it's time to add the data to the models
             for index, row in df.iterrows():
-                print(row['código'], row['disciplina'])
                 subject = self.check_subject(row)
+                self.save_professor(row, subject)
+                self.save_student(row, subject)
         else:
             # If not correct, notify the view that the uploaded document is not correct
             pass
-        
-        subs = Subject.objects.all()
-        for sub in subs:
-            print(sub.name)
-            print(sub.class_code)
-            print(sub.professor)
     
     def save_student(self, row, subject):
 
         try:
-            student = Student.objects.get(code=row['matrícula'])
+            student = Student.objects.get(name=row['aluno'])
             student.subject = subject
             student.save()
         except Student.DoesNotExist:
+            print(1)
+            print(row)
             student = Student(
-                code=row['matrícula'],
                 name=row['aluno'],
                 email=row['email do aluno'],
+                student_code=row['matrícula'],
                 ira=row['ira'],
                 grade=row['nota final'],
                 mention=row['menção'],
@@ -76,20 +77,15 @@ class ApiManager():
         try:
             subject = Subject.objects.get(
                 code=row['código'],
-                class_code=row['turma']
             )
-            return False
         except Subject.DoesNotExist:
             subject = Subject(
                 code=row['código'],
                 name=row['disciplina'],
-                class_code=row['turma']
             )
             subject.save()
-            self.save_professor(row, subject)
-            self.save_student(row, subject)
 
-            return subject
+        return subject
 
     def get_data(self):
 
