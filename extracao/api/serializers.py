@@ -22,4 +22,4 @@ class SubjectSerializer(serializers.ModelSerializer):
     tutors = StudentSerializer(many=True)
     class Meta:
         model = Subject
-        fields = ('id','code','name', 'professor','tutors',)
+        fields = ('id','code','name', 'classcode', 'professor','tutors',)

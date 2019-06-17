@@ -41,6 +41,14 @@ class Subject(models.Model):
         max_length=15,
     )
 
+    classcode = models.CharField(
+        ('Class Code'),
+        help_text=("Class Code"),
+        max_length=5,
+        null=True,
+        default=None
+    )
+
     name = models.CharField(
         ('Name'),
         help_text=("Subject Name"),
