@@ -41,6 +41,14 @@ class Subject(models.Model):
         max_length=15,
     )
 
+    classcode = models.CharField(
+        ('Class Code'),
+        help_text=("Class Code"),
+        max_length=5,
+        null=True,
+        default=None
+    )
+
     name = models.CharField(
         ('Name'),
         help_text=("Subject Name"),
@@ -71,20 +79,20 @@ class Student(models.Model):
     name = models.CharField(
         ('Name'),
         help_text=("Student Name"),
-        max_length=255,
+        max_length=150,
     )
 
     student_code = models.CharField(
         ('Code'),
         help_text=("Student Code"),
-        max_length=255,
+        max_length=15,
         null=True
     )
 
     email = models.CharField(
         ('Email'),
         help_text=("Student Email"),
-        max_length=255,
+        max_length=100,
         null=True
     )
 
@@ -103,7 +111,7 @@ class Student(models.Model):
     mention = models.CharField(
         ('Mention'),
         help_text=("Student Mention in the subject"),
-        max_length=255,
+        max_length=2,
         null=True
     )
 

@@ -82,6 +82,7 @@ class ApiManager():
             subject = Subject(
                 code=row['código'],
                 name=row['disciplina'],
+                classcode=row['turma']
             )
             subject.save()
 

@@ -1,11 +1,10 @@
 from django.urls import include, path
-from rest_framework import routers
-from .views import GeneralEnpoint
+from rest_framework.routers import DefaultRouter
+from .views import SubjectViewSet
+
+router = DefaultRouter()
+router.register(r'subject', SubjectViewSet)
 
 urlpatterns = [
-    path(
-        'subjects/',
-        GeneralEnpoint.as_view(),
-        name="subject-general-endpoint"
-    ),
+    path('', include(router.urls)),
 ]
